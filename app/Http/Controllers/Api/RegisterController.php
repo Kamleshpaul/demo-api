@@ -18,12 +18,13 @@ class RegisterController extends Controller
         $input = $request->validate([
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', Password::min(8)
+            'password' => ['required', 'confirmed', Password::min(8)
                 ->mixedCase()
                 ->numbers()
                 ->symbols()],
         ]);
 
+        $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
         return ApiResponse::success($user);
