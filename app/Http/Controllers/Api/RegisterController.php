@@ -11,7 +11,7 @@ use Illuminate\Validation\Rules\Password;
 class RegisterController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Login Api.
      */
     public function __invoke(Request $request)
     {
