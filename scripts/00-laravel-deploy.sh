@@ -12,5 +12,6 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-echo "Running npm i..."
+echo "Running npm setup..."
 npm install
+npm run build
