@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class LoginController extends Controller
@@ -23,9 +24,13 @@ class LoginController extends Controller
                 ->symbols()],
         ]);
 
-        $user = User::where($input)->first();
+        $user = User::where('email',$input['email'])->first();
         if (!$user) {
             return ApiResponse::failed('No User Found.');
+        }
+
+        if(!Hash::check($input['password'],$user->password)){
+            return ApiResponse::failed('Password not found.');
         }
 
         $token = $user->createToken($user->name);
