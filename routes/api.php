@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', \App\Http\Controllers\Api\RegisterController::class);
 Route::post('login', \App\Http\Controllers\Api\LoginController::class);
+
+Route::group(['middleware' => 'auth:sanctum'],function (){
+    Route::resource('products', ApiProductController::class)->except(['create', 'edit']);
+});
