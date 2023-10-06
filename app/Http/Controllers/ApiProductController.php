@@ -24,7 +24,7 @@ class ApiProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->all([
+        $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
