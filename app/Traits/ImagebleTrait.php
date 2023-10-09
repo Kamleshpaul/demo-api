@@ -20,11 +20,11 @@ trait ImagebleTrait
     {
         foreach (static::$imageble as $image) {
             if ($method == 'get'.Str::studly($image).'UrlAttribute') {
-                if (empty($this->$image) || ! Storage::exists($this->$image)) {
+                if (empty($this->image) || ! Storage::exists($this->image)) {
                     return '';
                 }
 
-                return Storage::url($this->$image);
+                return Storage::url($this->image);
             }
         }
 
